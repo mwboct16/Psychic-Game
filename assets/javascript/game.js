@@ -9,9 +9,6 @@ var totalLost = 0;
 var guessesLeft = 9;
 var currentGuesses = [];
 
-    // references to the html text
-
-
 // Computer decision
 var computerChoice = function () {
     computerDecision = computerChoices[Math.floor(Math.random() * computerChoices.length)];
@@ -20,6 +17,13 @@ var computerChoice = function () {
 computerChoice();
 console.log(computerDecision);
 
+// reset function
+var reset = function () {
+    guessesLeft = 9;
+    currentGuesses.length = 0;
+    computerChoice();
+    console.log(computerDecision);
+};
 document.onkeyup = function (event) {
 
     var winsText = document.getElementById("wins");
@@ -32,35 +36,29 @@ document.onkeyup = function (event) {
 
     if (userGuess === computerDecision) {
         totalWins++;
-        guessesLeft = 9;
-        currentGuesses.length = 0;
+        /*guessesLeft = 9;
+        currentGuesses.length = 0;*/
+        reset();
         console.log(totalWins);
     } else if (userGuess != computerDecision) {
         guessesLeft--;
         currentGuesses.push(userGuess);
         console.log(currentGuesses);
         console.log(guessesLeft);
-    }
+    } 
     if (guessesLeft === 0) {
         totalLost++;
-        guessesLeft = 9;
+        reset();
+        /*guessesLeft = 9;
         currentGuesses.length = 0;
-        console.log(totalLost);
+        console.log(totalLost);*/
     }
-
 
 winsText.innerHTML = "Wins: " + totalWins;
 lossText.innerHTML = "Losses: " + totalLost;
 guessesText.innerHTML = "Your guesses so far: " + currentGuesses.join("");
 remainingGuessesText.innerHTML = "Guesses Left: " + guessesLeft;
-console.log(winsText);
+/*console.log(winsText);
 console.log(lossText);
-console.log(guessesText); 
-
-
+console.log(guessesText); */
 };
-
-
-
-
-
